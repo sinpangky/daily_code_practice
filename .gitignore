@@ -64,4 +64,4 @@ Mkfile.old
 dkms.conf
 
 # Else
-.DS_Dtore
+**/.DS_Store
