@@ -1,9 +1,12 @@
-CC:=gcc
-SRCS:=$(wildcard *.c)
-BINS:=$(SRCS:%.c=%)
-all:$(BINS)
-%:%.c
+CC := gcc
+SRCS := $(wildcard *.c)
+BINS := $(SRCS:%.c=%.out)
+
+all: $(BINS)
+
+%.out: %.c
 	$(CC) $< -o $@
-.PHONY:clean
+
+.PHONY: clean
 clean:
-	rm  $(BINS)
+	rm -f $(BINS)

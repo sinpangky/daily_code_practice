@@ -43,6 +43,7 @@ int main(int argc, char* argv[]) {
     // 得到指定格式的权限
     char permission[20];
     mode_to_permission(buf.st_mode, permission);
+    
     printf("-%s %u %s %s %7ld %s %s\n", permission, buf.st_nlink,
            getpwuid(buf.st_uid)->pw_name, getgrgid(buf.st_gid)->gr_name,
            buf.st_size, time_string, p->d_name);
