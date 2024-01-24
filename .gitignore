@@ -65,3 +65,4 @@ dkms.conf
 
 # Else
 **/.DS_Store
+.vscode
