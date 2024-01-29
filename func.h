@@ -27,5 +27,6 @@
 #include <netdb.h>
 #include <sys/epoll.h>
 #define ARGS_CHECK(argc,num) {if(argc!=num) {printf("error args\n");return -1;}}
-#define ERROR_CHECK(ret,retval,func_name) {if(ret==retval) {printf("errno=%d,",errno);fflush(stdout);perror(func_name);return -1;}}
+#define ERROR_CHECK(ret,retval,func_name) {if(ret==retval) {printf("errno=%d,",errno);fflush(stdout);perror(func_name);printf("%s:%d\n",__FILE__,__LINE__);return -1;}}
 #define THREAD_ERR_CHECK(ret,func_name) {if(ret!=0) {printf("%s failed,%d %s\n",func_name,ret,strerror(ret));return -1;}}
+
