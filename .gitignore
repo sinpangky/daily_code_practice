@@ -65,4 +65,5 @@ dkms.conf
 
 # Else
 **/.DS_Store
-.vscode
+linux_learning/.vscode/
+linux_learning/temp/
