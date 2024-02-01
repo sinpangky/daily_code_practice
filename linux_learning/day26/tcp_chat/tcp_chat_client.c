@@ -1,6 +1,7 @@
 #include <func.h>
 
-int main(int argc, char const *argv[]) {
+
+int main(int argc, char const* argv[]) {
   ARGS_CHECK(argc, 3);
   int sock;
 
@@ -18,13 +19,13 @@ int main(int argc, char const *argv[]) {
   ERROR_CHECK(sock, -1, "socket");
 
   // 连接到服务器
-  int ret = connect(sock, (struct sockaddr *)&serv_address, addrlen);
+  int ret = connect(sock, (struct sockaddr*)&serv_address, addrlen);
   ERROR_CHECK(ret, -1, "connet");
 
   // 建立通信
   recv(sock, buffer, sizeof(buffer), 0);
   printf("%s\n", buffer);
-fd_set set;
+  fd_set set;
 
   while (1) {
     FD_ZERO(&set);
@@ -34,7 +35,7 @@ fd_set set;
     if (FD_ISSET(STDIN_FILENO, &set)) {
       memset(buffer, 0, sizeof(buffer));
       read(STDIN_FILENO, buffer, sizeof(buffer));
-      if(!strcmp(buffer,"exit\n")){
+      if (!strcmp(buffer, "exit\n")) {
         break;
       }
       send(sock, buffer, strlen(buffer) - 1, 0);
@@ -42,10 +43,10 @@ fd_set set;
     if (FD_ISSET(sock, &set)) {
       memset(buffer, 0, sizeof(buffer));
       ret = recv(sock, buffer, sizeof(buffer), 0);
-      if(0 ==ret) {
+      if (0 == ret) {
         break;
       }
-      printf("Message from server:\n%s\n",buffer);
+      printf("Message from server:\n%s\n", buffer);
     }
   }
   // 关闭

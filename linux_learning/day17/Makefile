@@ -4,7 +4,7 @@ CC:=gcc
 CFLAGS:=-g
 ELF:=main
 $(ELF):$(OBJS)
-	gcc -o $@ $^
+	gcc -Wall -o $@ $^
 
 rebuild:clean $(ELF)
 clean:
