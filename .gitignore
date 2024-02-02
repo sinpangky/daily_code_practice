@@ -67,3 +67,4 @@ dkms.conf
 **/.DS_Store
 linux_learning/.vscode/
 linux_learning/temp/
+**/testfile
