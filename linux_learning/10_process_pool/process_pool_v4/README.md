@@ -6,8 +6,8 @@ The `postion` in early versions can be wrong!
 
 - Use `sendfile` and `splice` to accelerate file-transporting rate
   position:
-  - ./server/transport_file.c: line 
-  - ./client/transport_file.c: line 
+  - ./server/transport_file.c: line 57
+  - ./client/transport_file.c: line 39～51
 - Achieve graceful exit
   position:
   - 

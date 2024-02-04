@@ -1,5 +1,6 @@
 #include "head.h"
-
+/** build child processes and wait for parent's signal through command_pipe
+*/
 int MakeChild(ProcessData* processliset_ptr, int process_num) {
   int pipe_fd[2];
   int command_pipe_fd[2];
@@ -35,7 +36,7 @@ int MakeChild(ProcessData* processliset_ptr, int process_num) {
 #ifdef DEBUG
           printf("fd received\n");
 #endif
-          printf("receive transport file task %d\n", client_fd);
+          // printf("receive transport file task %d\n", client_fd);
           SendFile(client_fd);
           strcpy(pipe_buf, "task-finish");
           close(client_fd);

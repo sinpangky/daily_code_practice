@@ -16,20 +16,23 @@ int recvn(int new_fd, void* startPtr, int length) {
   }
   return 0;
 }
-
+/** receive the file from server
+ * @param new_fd server_fd
+ * @param filename char array of filename
+ */
 int ReceiveFile(int new_fd, char* filename) {
   off_t file_size;
   int ret = recvn(new_fd, (void*)&file_size, sizeof(off_t));
 #ifdef DEBUG
-    printf("recv file size\n");
+  printf("recv file size\n");
 #endif
   ERROR_CHECK(ret, -1, "recvn");
-
+  // open or rewrite the file
   int fd = open(filename, O_WRONLY | O_CREAT, 0666);
   ERROR_CHECK(fd, -1, "open");
   struct timeval start, end;
   gettimeofday(&start, NULL);
-
+  // use pipe the transport file stream: server_fd -> pipe_fd[1]-> pipe_fd[0] -> file_fd
   int pipe_fd[2];
   pipe(pipe_fd);
   off_t total = 0;
@@ -41,13 +44,13 @@ int ReceiveFile(int new_fd, char* filename) {
     }
     total += retval;
     retval = splice(pipe_fd[0], NULL, fd, NULL, retval, SPLICE_F_MORE);
-    if(retval<=0){
+    if (retval <= 0) {
       printf("the server break\n");
       break;
     }
   }
   printf("download finished\n");
-  // print used time
+  // print downloading time
   gettimeofday(&end, NULL);
   printf("download time = %ldus\n",
          (end.tv_sec - start.tv_sec) * 1000000 + end.tv_usec - start.tv_usec);

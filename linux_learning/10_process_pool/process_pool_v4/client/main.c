@@ -14,8 +14,10 @@ int main(int argc, char const *argv[]) {
   serAddr.sin_port = htons(atoi(argv[2]));
   int ret;
   char buf[1000] = {0};
+#ifdef WRITE  
   printf("Please input filename to download:\n");
   scanf("%s", buf);
+#endif
 
 #ifdef T
   strcpy(buf, "testfile");
